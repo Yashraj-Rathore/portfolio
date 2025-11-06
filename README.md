@@ -2,7 +2,7 @@
 
 A modern animated developer portfolio built with React + Tailwind + Framer Motion.
 
-🌐 **Live Site:** portfolio-theta-mocha-30.vercel.app
+🌐 **Live Site:** https://portfolio-theta-mocha-30.vercel.app
 
 📂 **Repo:** https://github.com/Yashraj-Rathore/portfolio
 
