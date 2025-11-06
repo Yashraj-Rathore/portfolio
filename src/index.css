@@ -1,13 +1,49 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*  Smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/*  Colors & background */
+:root {
+  --bg: #0b0f17;
+}
+
+body {
+  background:
+    radial-gradient(1200px 800px at 20% -10%, rgba(56, 189, 248, 0.10), transparent 50%),
+    radial-gradient(1000px 700px at 80% -10%, rgba(94, 234, 212, 0.08), transparent 50%),
+    var(--bg);
+  color: #e5e5e5;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/*  Focus styles (a11y friendly) */
+*:focus-visible {
+  outline: 2px solid rgba(45, 212, 191, 0.6);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/*  Custom selection styling */
+::selection {
+  background: rgba(45, 212, 191, 0.4);
+  color: white;
+}
+
+/*  Hide scrollbars on Webkit if desired */
+/* Remove if you want visible scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
 }
