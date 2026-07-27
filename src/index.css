@@ -353,7 +353,8 @@ img {
 .hero__actions {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.9rem 1.25rem;
   margin-top: 2rem;
 }
 

@@ -1,4 +1,4 @@
-import { FiArrowUpRight, FiGithub, FiLock, FiPlay } from "react-icons/fi";
+import { FiArrowUpRight, FiGithub, FiPlay } from "react-icons/fi";
 import Reveal from "./Reveal";
 
 type Project = {
@@ -7,8 +7,8 @@ type Project = {
   kind: string;
   summary: string;
   detail: string;
-  tech: string[];
-  source?: string;
+  languages: string[];
+  source: string;
   demo?: string;
   visual: "payments" | "budget" | "leads" | "auction";
   featured?: boolean;
@@ -23,7 +23,7 @@ const projects: Project[] = [
       "A production-minded payment operations simulator built for the messy realities behind moving money.",
     detail:
       "Idempotent payouts, an append-only ledger, approval workflows, merchant webhooks, reconciliation, observability, and a responsive operator dashboard.",
-    tech: ["NestJS", "Nuxt", "SQL Server", "Redis", "AWS"],
+    languages: ["TypeScript", "Vue", "HCL", "CSS", "JavaScript"],
     source: "https://github.com/Yashraj-Rathore/paymentops-orchestrator",
     visual: "payments",
     featured: true,
@@ -36,7 +36,7 @@ const projects: Project[] = [
       "A full-stack dashboard that turns raw spending into a clear picture of financial health.",
     detail:
       "Category breakdowns, income-versus-expense visualizations, trends, and actionable budgeting recommendations.",
-    tech: ["Angular", "Django", "PostgreSQL", "Docker"],
+    languages: ["TypeScript", "Python", "HTML", "CSS", "SCSS", "JavaScript"],
     source: "https://github.com/Yashraj-Rathore/Spending-Analysis-Budget",
     visual: "budget",
   },
@@ -48,7 +48,8 @@ const projects: Project[] = [
       "A missed-call recovery platform that turns unanswered service calls into qualified, bookable leads.",
     detail:
       "Signed Twilio webhooks, deterministic SMS workflows, staff handoff, optional AI analysis, tenant isolation, and auditable operations.",
-    tech: [".NET 10", "Next.js", "PostgreSQL", "Hangfire", "Twilio"],
+    languages: ["C#", "TypeScript", "CSS", "PowerShell"],
+    source: "https://github.com/Yashraj-Rathore/LeadRecovery",
     visual: "leads",
   },
   {
@@ -59,7 +60,7 @@ const projects: Project[] = [
       "An auction marketplace exploring real-time bidding through forward and Dutch auction models.",
     detail:
       "A Maven-based Java web application with user flows, auction logic, bidding history, and a Dockerized demo.",
-    tech: ["Java", "Maven", "SQLite", "Docker"],
+    languages: ["HTML", "Java", "CSS", "JavaScript"],
     source: "https://github.com/Yashraj-Rathore/EcommerceApp",
     demo: "https://www.youtube.com/watch?v=cfCOQieQubs",
     visual: "auction",
@@ -186,21 +187,15 @@ export default function Projects() {
             delay={index * 0.04}
           >
             <article className={`project-card project-card--${project.visual}`}>
-              {project.source ? (
-                <a
-                  className="project-card__visual-link"
-                  href={project.source}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`Open ${project.title} on GitHub`}
-                >
-                  <ProjectVisual type={project.visual} />
-                </a>
-              ) : (
-                <div className="project-card__visual-link">
-                  <ProjectVisual type={project.visual} />
-                </div>
-              )}
+              <a
+                className="project-card__visual-link"
+                href={project.source}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Open ${project.title} on GitHub`}
+              >
+                <ProjectVisual type={project.visual} />
+              </a>
 
               <div className="project-card__content">
                 <div className="project-card__meta">
@@ -208,32 +203,22 @@ export default function Projects() {
                   <p>{project.kind}</p>
                 </div>
                 <h3>
-                  {project.source ? (
-                    <a href={project.source} target="_blank" rel="noreferrer">
-                      {project.title}
-                      <FiArrowUpRight />
-                    </a>
-                  ) : (
-                    <span>{project.title}</span>
-                  )}
+                  <a href={project.source} target="_blank" rel="noreferrer">
+                    {project.title}
+                    <FiArrowUpRight />
+                  </a>
                 </h3>
                 <p className="project-card__summary">{project.summary}</p>
                 <p className="project-card__detail">{project.detail}</p>
-                <div className="tag-list" aria-label="Technologies used">
-                  {project.tech.map((tech) => (
-                    <span key={tech}>{tech}</span>
+                <div className="tag-list" aria-label="Repository languages">
+                  {project.languages.map((language) => (
+                    <span key={language}>{language}</span>
                   ))}
                 </div>
                 <div className="project-card__links">
-                  {project.source ? (
-                    <a href={project.source} target="_blank" rel="noreferrer">
-                      <FiGithub /> Source
-                    </a>
-                  ) : (
-                    <span className="project-card__private">
-                      <FiLock /> Private product build
-                    </span>
-                  )}
+                  <a href={project.source} target="_blank" rel="noreferrer">
+                    <FiGithub /> Source
+                  </a>
                   {project.demo && (
                     <a href={project.demo} target="_blank" rel="noreferrer">
                       <FiPlay /> Watch demo

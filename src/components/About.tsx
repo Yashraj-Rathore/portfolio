@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FiArrowDown, FiArrowUpRight, FiGithub } from "react-icons/fi";
+import { FiArrowDown, FiArrowUpRight, FiDownload, FiGithub } from "react-icons/fi";
 import Reveal from "./Reveal";
 
 const lineTransition = {
@@ -56,6 +56,13 @@ export default function About() {
               <div className="hero__actions">
                 <a className="button button--primary" href="#work">
                   See my work <FiArrowDown />
+                </a>
+                <a
+                  className="button button--outline"
+                  href="/Yash_Rathore_General_Software_Engineer_Resume.pdf"
+                  download="Yash_Rathore_General_Software_Engineer_Resume.pdf"
+                >
+                  Download résumé <FiDownload />
                 </a>
                 <a
                   className="text-link"
