@@ -1,4 +1,4 @@
-import { FiArrowUpRight, FiGithub, FiPlay } from "react-icons/fi";
+import { FiArrowUpRight, FiGithub, FiLock, FiPlay } from "react-icons/fi";
 import Reveal from "./Reveal";
 
 type Project = {
@@ -8,9 +8,9 @@ type Project = {
   summary: string;
   detail: string;
   tech: string[];
-  source: string;
+  source?: string;
   demo?: string;
-  visual: "payments" | "budget" | "music" | "auction";
+  visual: "payments" | "budget" | "leads" | "auction";
   featured?: boolean;
 };
 
@@ -42,15 +42,14 @@ const projects: Project[] = [
   },
   {
     number: "03",
-    title: "Allegro",
-    kind: "Music utility",
+    title: "Lead Recovery",
+    kind: "AI-assisted lead operations",
     summary:
-      "A desktop converter that gives plain-text tablature a second life as playable MusicXML.",
+      "A missed-call recovery platform that turns unanswered service calls into qualified, bookable leads.",
     detail:
-      "Supports guitar, bass, and drum tabs for use across common notation software and music platforms.",
-    tech: ["Java", "MusicXML", "Parsing", "Desktop UI"],
-    source: "https://github.com/Yashraj-Rathore/TAB_TO_MUSICXML",
-    visual: "music",
+      "Signed Twilio webhooks, deterministic SMS workflows, staff handoff, optional AI analysis, tenant isolation, and auditable operations.",
+    tech: [".NET 10", "Next.js", "PostgreSQL", "Hangfire", "Twilio"],
+    visual: "leads",
   },
   {
     number: "04",
@@ -124,19 +123,23 @@ function ProjectVisual({ type }: { type: Project["visual"] }) {
     );
   }
 
-  if (type === "music") {
+  if (type === "leads") {
     return (
-      <div className="project-visual music-ui" aria-hidden="true">
-        <div className="music-ui__disc">
-          <span>YR</span>
+      <div className="project-visual lead-ui" aria-hidden="true">
+        <div className="lead-ui__phone">
+          <span>Missed call</span>
+          <strong>+1 · 416 · 555 · 0182</strong>
+          <i>Recovery started</i>
         </div>
-        <div className="music-ui__staff">
-          {[0, 1, 2, 3, 4].map((line) => <i key={line} />)}
-          <b className="note note--one">♪</b>
-          <b className="note note--two">♫</b>
-          <b className="note note--three">♪</b>
+        <div className="lead-ui__thread">
+          <p>Sorry we missed you. What can we help with?</p>
+          <p>Kitchen pipe leak — need someone today.</p>
         </div>
-        <p>TAB → MUSICXML</p>
+        <div className="lead-ui__score">
+          <span>Qualified lead</span>
+          <strong>High intent</strong>
+          <i>Ready to book</i>
+        </div>
       </div>
     );
   }
@@ -183,15 +186,21 @@ export default function Projects() {
             delay={index * 0.04}
           >
             <article className={`project-card project-card--${project.visual}`}>
-              <a
-                className="project-card__visual-link"
-                href={project.source}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={`Open ${project.title} on GitHub`}
-              >
-                <ProjectVisual type={project.visual} />
-              </a>
+              {project.source ? (
+                <a
+                  className="project-card__visual-link"
+                  href={project.source}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`Open ${project.title} on GitHub`}
+                >
+                  <ProjectVisual type={project.visual} />
+                </a>
+              ) : (
+                <div className="project-card__visual-link">
+                  <ProjectVisual type={project.visual} />
+                </div>
+              )}
 
               <div className="project-card__content">
                 <div className="project-card__meta">
@@ -199,10 +208,14 @@ export default function Projects() {
                   <p>{project.kind}</p>
                 </div>
                 <h3>
-                  <a href={project.source} target="_blank" rel="noreferrer">
-                    {project.title}
-                    <FiArrowUpRight />
-                  </a>
+                  {project.source ? (
+                    <a href={project.source} target="_blank" rel="noreferrer">
+                      {project.title}
+                      <FiArrowUpRight />
+                    </a>
+                  ) : (
+                    <span>{project.title}</span>
+                  )}
                 </h3>
                 <p className="project-card__summary">{project.summary}</p>
                 <p className="project-card__detail">{project.detail}</p>
@@ -212,9 +225,15 @@ export default function Projects() {
                   ))}
                 </div>
                 <div className="project-card__links">
-                  <a href={project.source} target="_blank" rel="noreferrer">
-                    <FiGithub /> Source
-                  </a>
+                  {project.source ? (
+                    <a href={project.source} target="_blank" rel="noreferrer">
+                      <FiGithub /> Source
+                    </a>
+                  ) : (
+                    <span className="project-card__private">
+                      <FiLock /> Private product build
+                    </span>
+                  )}
                   {project.demo && (
                     <a href={project.demo} target="_blank" rel="noreferrer">
                       <FiPlay /> Watch demo

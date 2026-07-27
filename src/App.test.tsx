@@ -13,6 +13,11 @@ test("renders the portfolio identity and real project links", () => {
     "href",
     "https://github.com/Yashraj-Rathore/paymentops-orchestrator"
   );
+  expect(
+    screen.getByRole("heading", { name: "Lead Recovery" })
+  ).toBeInTheDocument();
+  expect(screen.getByText("Private product build")).toBeInTheDocument();
+  expect(screen.queryByText("Allegro")).not.toBeInTheDocument();
   expect(screen.getByRole("link", { name: /send me a message/i })).toHaveAttribute(
     "href",
     "mailto:rathore.yash6@yahoo.com"

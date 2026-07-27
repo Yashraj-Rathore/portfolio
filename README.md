@@ -9,7 +9,7 @@ A dark, editorial portfolio for full-stack engineer Yashraj Rathore. The site pa
 ## Highlights
 
 - Original responsive hero and project artwork built entirely in HTML/CSS
-- Direct links to verified public project repositories and demos
+- Direct links to public repositories, with private product work clearly labeled
 - Mobile navigation, email copy action, and clear contact paths
 - Framer Motion reveals with `prefers-reduced-motion` support
 - Semantic sections, keyboard focus states, and updated social metadata
