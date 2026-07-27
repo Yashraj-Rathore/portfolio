@@ -1414,6 +1414,67 @@ img {
   grid-template-columns: 0.4fr 1fr;
 }
 
+.journey-overview {
+  display: grid;
+  grid-template-columns: minmax(0, 0.75fr) minmax(420px, 1fr);
+  align-items: end;
+  gap: clamp(3rem, 7vw, 7rem);
+  margin-bottom: clamp(4rem, 8vw, 7rem);
+  padding: clamp(2rem, 4vw, 3.5rem) 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.journey-overview__story {
+  max-width: 680px;
+  margin: 0;
+  color: #b5b7af;
+  font-size: clamp(1.15rem, 1.8vw, 1.55rem);
+  line-height: 1.55;
+}
+
+.journey-overview__story em {
+  color: var(--paper);
+  font-family: "Newsreader", Georgia, serif;
+  font-weight: 400;
+}
+
+.journey-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.journey-stat {
+  min-height: 7.5rem;
+  padding: 0.7rem 1.4rem;
+  border-left: 1px solid var(--line);
+}
+
+.journey-stat strong,
+.journey-stat span {
+  display: block;
+}
+
+.journey-stat strong {
+  color: var(--acid);
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(2.25rem, 4vw, 4.2rem);
+  font-weight: 400;
+  letter-spacing: -0.06em;
+  line-height: 1;
+}
+
+.journey-stat span {
+  max-width: 8rem;
+  margin-top: 0.8rem;
+  color: #777a71;
+  font-size: 0.6rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
 .timeline {
   border-top: 1px solid var(--line);
 }
@@ -1437,6 +1498,19 @@ img {
   margin: 0.5rem 0 0;
   color: #6e7168;
   font-size: 0.64rem;
+}
+
+.timeline-item__period small {
+  display: inline-flex;
+  margin-top: 1.15rem;
+  padding: 0.4rem 0.65rem;
+  border: 1px solid #343730;
+  border-radius: 999px;
+  color: #a7aaa1;
+  font-size: 0.54rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .timeline-item__content {
@@ -1501,6 +1575,23 @@ img {
   border-radius: 50%;
   background: var(--violet);
   content: "";
+}
+
+.timeline-item__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.timeline-item__tags span {
+  padding: 0.48rem 0.72rem;
+  border: 1px solid #30332c;
+  border-radius: 999px;
+  color: #a4a79e;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
 /* Skills */
@@ -1919,6 +2010,7 @@ img {
   .about__grid,
   .section-heading,
   .section-heading--split,
+  .journey-overview,
   .skills__intro {
     grid-template-columns: 1fr;
   }
@@ -1966,6 +2058,21 @@ img {
   .hero__eyebrow {
     margin-bottom: 2.5rem;
     font-size: 0.59rem;
+  }
+
+  .journey-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .journey-stat {
+    min-height: auto;
+    padding: 1.2rem 0;
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+
+  .journey-stat span {
+    max-width: none;
   }
 
   .hero__actions,
