@@ -1,48 +1,81 @@
+import { useState } from "react";
+import {
+  FiArrowUpRight,
+  FiCheck,
+  FiCopy,
+  FiGithub,
+  FiLinkedin,
+  FiMail,
+} from "react-icons/fi";
 import Reveal from "./Reveal";
-import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
+
+const email = "rathore.yash6@yahoo.com";
 
 export default function Contact() {
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(email);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1800);
+    } catch {
+      window.location.href = `mailto:${email}`;
+    }
+  };
+
   return (
-    <section id="contact" className="py-10 md:py-16"> 
+    <section id="contact" className="section contact">
+      <div className="contact__glow" aria-hidden="true" />
+      <div className="section-kicker section-kicker--light">
+        <span>05</span>
+        <p>Start a conversation</p>
+      </div>
+
       <Reveal>
-        <h2 className="text-center text-3xl md:text-4xl font-bold bg-gradient-to-r from-teal-300 via-cyan-300 to-blue-300 bg-clip-text text-transparent">
-          Contact
+        <p className="contact__pretitle">Have a hard problem or a bright idea?</p>
+        <h2>
+          Let&apos;s make something
+          <br />
+          <em>worth remembering.</em>
         </h2>
       </Reveal>
 
-      <Reveal>
-        <p className="mt-4 text-center text-slate-300">
-          Feel free to reach out — I love collaborating & contributing to impactful products.
-        </p>
+      <Reveal delay={0.08}>
+        <div className="contact__actions">
+          <a className="button button--light" href={`mailto:${email}`}>
+            <FiMail /> Send me a message <FiArrowUpRight />
+          </a>
+          <button className="copy-button" type="button" onClick={copyEmail}>
+            {copied ? <FiCheck /> : <FiCopy />}
+            {copied ? "Copied!" : email}
+          </button>
+        </div>
       </Reveal>
 
-      <div className="mt-8 flex items-center justify-center gap-4 flex-wrap px-4">
+      <div className="contact__bottom">
         <Reveal>
-          <a
-            href="mailto:yashraj@example.com"
-            className="flex items-center gap-2 bg-teal-400 text-[#0b0f17] font-semibold px-4 py-2 rounded-lg hover:bg-teal-300"
-          >
-            <FaEnvelope /> Email
-          </a>
+          <p>
+            Open to meaningful full-time roles, ambitious products, and
+            conversations with people who care about the details.
+          </p>
         </Reveal>
-
-        <Reveal>
+        <div className="contact__socials">
           <a
-            href="https://github.com/"
-            className="flex items-center gap-2 text-white border border-white/10 bg-white/10 px-4 py-2 rounded-lg hover:bg-white/20"
+            href="https://github.com/Yashraj-Rathore"
+            target="_blank"
+            rel="noreferrer"
           >
-            <FaGithub /> GitHub
+            <FiGithub /> GitHub <FiArrowUpRight />
           </a>
-        </Reveal>
-
-        <Reveal>
           <a
-            href="https://linkedin.com"
-            className="flex items-center gap-2 text-white border border-white/10 bg-white/10 px-4 py-2 rounded-lg hover:bg-white/20"
+            href="https://ca.linkedin.com/in/yashraj-rathore"
+            target="_blank"
+            rel="noreferrer"
           >
-            <FaLinkedin /> LinkedIn
+            <FiLinkedin /> LinkedIn <FiArrowUpRight />
           </a>
-        </Reveal>
+        </div>
       </div>
     </section>
   );

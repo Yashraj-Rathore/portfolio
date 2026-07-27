@@ -1,82 +1,243 @@
+import { FiArrowUpRight, FiGithub, FiPlay } from "react-icons/fi";
 import Reveal from "./Reveal";
 
-const projects = [
+type Project = {
+  number: string;
+  title: string;
+  kind: string;
+  summary: string;
+  detail: string;
+  tech: string[];
+  source: string;
+  demo?: string;
+  visual: "payments" | "budget" | "music" | "auction";
+  featured?: boolean;
+};
+
+const projects: Project[] = [
   {
-    title: "Vosyn Connect – Developer Platform",
-    blurb:
-      "Full-stack API portal enabling key mgmt, analytics, org structure & localization workflows. Supports JWT auth + RBAC.",
-    tech: ["Next.js", "FastAPI", "GCP", "Firebase", "SQLModel"],
-    live: "#",
-    repo: "#",
-    image: "/images/connect.png",
+    number: "01",
+    title: "PaymentOps Orchestrator",
+    kind: "Fintech systems platform",
+    summary:
+      "A production-minded payment operations simulator built for the messy realities behind moving money.",
+    detail:
+      "Idempotent payouts, an append-only ledger, approval workflows, merchant webhooks, reconciliation, observability, and a responsive operator dashboard.",
+    tech: ["NestJS", "Nuxt", "SQL Server", "Redis", "AWS"],
+    source: "https://github.com/Yashraj-Rathore/paymentops-orchestrator",
+    visual: "payments",
+    featured: true,
   },
   {
-    title: "API Explorer",
-    blurb:
-      "Live API testing interface w/ secured proxy + generated examples for Python/TS + upload pipeline.",
-    tech: ["React", "FastAPI", "PostgreSQL", "MUI"],
-    live: "#",
-    repo: "#",
-    image: "/images/explorer.png",
+    number: "02",
+    title: "Spending Analysis",
+    kind: "Personal finance dashboard",
+    summary:
+      "A full-stack dashboard that turns raw spending into a clear picture of financial health.",
+    detail:
+      "Category breakdowns, income-versus-expense visualizations, trends, and actionable budgeting recommendations.",
+    tech: ["Angular", "Django", "PostgreSQL", "Docker"],
+    source: "https://github.com/Yashraj-Rathore/Spending-Analysis-Budget",
+    visual: "budget",
+  },
+  {
+    number: "03",
+    title: "Allegro",
+    kind: "Music utility",
+    summary:
+      "A desktop converter that gives plain-text tablature a second life as playable MusicXML.",
+    detail:
+      "Supports guitar, bass, and drum tabs for use across common notation software and music platforms.",
+    tech: ["Java", "MusicXML", "Parsing", "Desktop UI"],
+    source: "https://github.com/Yashraj-Rathore/TAB_TO_MUSICXML",
+    visual: "music",
+  },
+  {
+    number: "04",
+    title: "Auction Commerce",
+    kind: "Multi-tier e-commerce",
+    summary:
+      "An auction marketplace exploring real-time bidding through forward and Dutch auction models.",
+    detail:
+      "A Maven-based Java web application with user flows, auction logic, bidding history, and a Dockerized demo.",
+    tech: ["Java", "Maven", "SQLite", "Docker"],
+    source: "https://github.com/Yashraj-Rathore/EcommerceApp",
+    demo: "https://www.youtube.com/watch?v=cfCOQieQubs",
+    visual: "auction",
   },
 ];
 
+function ProjectVisual({ type }: { type: Project["visual"] }) {
+  if (type === "payments") {
+    return (
+      <div className="project-visual payment-ui" aria-hidden="true">
+        <div className="mock-window__bar">
+          <span />
+          <span />
+          <span />
+          <p>ops / overview</p>
+        </div>
+        <div className="payment-ui__grid">
+          <div className="payment-ui__metric">
+            <span>Volume today</span>
+            <strong>$248,390</strong>
+            <small>↗ 12.4%</small>
+          </div>
+          <div className="payment-ui__chart">
+            {[42, 62, 48, 75, 58, 88, 71, 96].map((height, index) => (
+              <i key={index} style={{ height: `${height}%` }} />
+            ))}
+          </div>
+          <div className="payment-ui__list">
+            {["Paid", "Processing", "Review"].map((label, index) => (
+              <div key={label}>
+                <span className={`payment-status status-${index}`} />
+                <p>{label}</p>
+                <strong>{["$12,480", "$8,210", "$4,600"][index]}</strong>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "budget") {
+    return (
+      <div className="project-visual budget-ui" aria-hidden="true">
+        <div className="budget-ui__header">
+          <span>Monthly overview</span>
+          <strong>$4,280</strong>
+        </div>
+        <div className="budget-ui__ring">
+          <div>
+            <strong>68%</strong>
+            <span>on track</span>
+          </div>
+        </div>
+        <div className="budget-ui__legend">
+          <span><i /> Home</span>
+          <span><i /> Life</span>
+          <span><i /> Future</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "music") {
+    return (
+      <div className="project-visual music-ui" aria-hidden="true">
+        <div className="music-ui__disc">
+          <span>YR</span>
+        </div>
+        <div className="music-ui__staff">
+          {[0, 1, 2, 3, 4].map((line) => <i key={line} />)}
+          <b className="note note--one">♪</b>
+          <b className="note note--two">♫</b>
+          <b className="note note--three">♪</b>
+        </div>
+        <p>TAB → MUSICXML</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="project-visual auction-ui" aria-hidden="true">
+      <div className="auction-ui__tag">LIVE BID</div>
+      <div className="auction-ui__object">
+        <span>01</span>
+        <span>02</span>
+        <span>03</span>
+      </div>
+      <div className="auction-ui__price">
+        <span>Current bid</span>
+        <strong>$1,240</strong>
+      </div>
+      <div className="auction-ui__button">Place bid</div>
+    </div>
+  );
+}
+
 export default function Projects() {
   return (
-    <section id="projects" className="py-10 md:py-16">
-      <Reveal>
-        <h2 className="text-center text-3xl md:text-4xl font-bold bg-gradient-to-r from-teal-300 via-cyan-300 to-blue-300 bg-clip-text text-transparent">
-          Projects
-        </h2>
-      </Reveal>
+    <section id="work" className="section projects">
+      <div className="section-heading">
+        <div className="section-kicker">
+          <span>02</span>
+          <p>Selected work</p>
+        </div>
+        <Reveal>
+          <h2>
+            Things I&apos;ve made
+            <br />
+            <em>and learned from.</em>
+          </h2>
+        </Reveal>
+      </div>
 
-      <div className="max-w-6xl mx-auto mt-12 grid gap-8 md:grid-cols-2 px-4">
-        {projects.map((p) => (
-          <Reveal key={p.title}>
-            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 hover:-translate-y-1 transition">
-              {p.image && (
-                <img
-                  src={p.image}
-                  className="rounded-xl mb-4 h-40 w-full object-cover"
-                />
-              )}
+      <div className="projects__grid">
+        {projects.map((project, index) => (
+          <Reveal
+            key={project.title}
+            className={project.featured ? "project-wrap project-wrap--featured" : "project-wrap"}
+            delay={index * 0.04}
+          >
+            <article className={`project-card project-card--${project.visual}`}>
+              <a
+                className="project-card__visual-link"
+                href={project.source}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Open ${project.title} on GitHub`}
+              >
+                <ProjectVisual type={project.visual} />
+              </a>
 
-              <h3 className="text-xl font-semibold">{p.title}</h3>
-              <p className="text-sm text-slate-300 mt-2">{p.blurb}</p>
-
-              <div className="mt-4 flex flex-wrap gap-2">
-                {p.tech.map((t) => (
-                  <span
-                    key={t}
-                    className="text-xs px-2 py-1 rounded-full bg-white/5 border border-white/10 text-slate-200"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-
-              <div className="mt-6 flex gap-3">
-                {p.live && (
-                  <a
-                    href={p.live}
-                    className="bg-teal-400 text-[#0b0f17] font-semibold px-3 py-2 rounded-lg hover:bg-teal-300"
-                  >
-                    Live
+              <div className="project-card__content">
+                <div className="project-card__meta">
+                  <span>{project.number}</span>
+                  <p>{project.kind}</p>
+                </div>
+                <h3>
+                  <a href={project.source} target="_blank" rel="noreferrer">
+                    {project.title}
+                    <FiArrowUpRight />
                   </a>
-                )}
-                {p.repo && (
-                  <a
-                    href={p.repo}
-                    className="border border-white/10 bg-white/10 px-3 py-2 rounded-lg hover:bg-white/20"
-                  >
-                    Source
+                </h3>
+                <p className="project-card__summary">{project.summary}</p>
+                <p className="project-card__detail">{project.detail}</p>
+                <div className="tag-list" aria-label="Technologies used">
+                  {project.tech.map((tech) => (
+                    <span key={tech}>{tech}</span>
+                  ))}
+                </div>
+                <div className="project-card__links">
+                  <a href={project.source} target="_blank" rel="noreferrer">
+                    <FiGithub /> Source
                   </a>
-                )}
+                  {project.demo && (
+                    <a href={project.demo} target="_blank" rel="noreferrer">
+                      <FiPlay /> Watch demo
+                    </a>
+                  )}
+                </div>
               </div>
-            </div>
+            </article>
           </Reveal>
         ))}
       </div>
+
+      <Reveal className="projects__more">
+        <p>There&apos;s more where those came from.</p>
+        <a
+          className="button button--outline"
+          href="https://github.com/Yashraj-Rathore?tab=repositories"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Explore all repositories <FiArrowUpRight />
+        </a>
+      </Reveal>
     </section>
   );
 }

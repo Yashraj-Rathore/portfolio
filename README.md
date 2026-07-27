@@ -1,27 +1,32 @@
-# Personal Portfolio
+# Yashraj Rathore — Portfolio
 
-A modern animated developer portfolio built with React + Tailwind + Framer Motion.
+A dark, editorial portfolio for full-stack engineer Yashraj Rathore. The site pairs original project visuals with accessible motion, a responsive project showcase, and direct links to real work.
 
-🌐 **Live Site:** https://portfolio-theta-mocha-30.vercel.app
+**Live site:** https://portfolio-theta-mocha-30.vercel.app
 
-📂 **Repo:** https://github.com/Yashraj-Rathore/portfolio
+**GitHub:** https://github.com/Yashraj-Rathore
 
-## 🚀 Tech Stack
-- React
+## Highlights
+
+- Original responsive hero and project artwork built entirely in HTML/CSS
+- Direct links to verified public project repositories and demos
+- Mobile navigation, email copy action, and clear contact paths
+- Framer Motion reveals with `prefers-reduced-motion` support
+- Semantic sections, keyboard focus states, and updated social metadata
+
+## Built with
+
+- React 18
 - TypeScript
-- TailwindCSS
 - Framer Motion
-- Vercel (Deployment)
+- Tailwind CSS + custom CSS
+- React Icons
 
-## ✨ Features
-- 3D Parallax Hero
-- Animated Background Waves + Paths
-- Project Showcase Cards
-- Experience + Skills Sections
-- Responsive UI
-
-## 📦 Run Locally
+## Run locally
 
 ```bash
 npm install
 npm start
+```
+
+Create a production bundle with `npm run build` and run the test suite with `npm test -- --watchAll=false`.

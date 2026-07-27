@@ -1,9 +1,20 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen } from "@testing-library/react";
+import App from "./App";
 
-test('renders learn react link', () => {
+test("renders the portfolio identity and real project links", () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+
+  expect(
+    screen.getByRole("heading", { name: /complex systems, made human/i })
+  ).toBeInTheDocument();
+  expect(
+    screen.getAllByRole("link", { name: /paymentops orchestrator/i })[0]
+  ).toHaveAttribute(
+    "href",
+    "https://github.com/Yashraj-Rathore/paymentops-orchestrator"
+  );
+  expect(screen.getByRole("link", { name: /send me a message/i })).toHaveAttribute(
+    "href",
+    "mailto:rathore.yash6@yahoo.com"
+  );
 });

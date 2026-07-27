@@ -1,44 +1,83 @@
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { FiArrowUpRight, FiMenu, FiX } from "react-icons/fi";
+
+const nav = [
+  { id: "about", label: "About" },
+  { id: "work", label: "Work" },
+  { id: "experience", label: "Journey" },
+  { id: "toolbox", label: "Toolbox" },
+];
+
 export default function Header() {
-  const nav = [
-    { id: "about", label: "About" },
-    { id: "projects", label: "Projects" },
-    { id: "experience", label: "Experience" },
-    { id: "skills", label: "Skills" },
-    { id: "contact", label: "Contact" },
-  ];
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.classList.toggle("menu-open", menuOpen);
+    return () => document.body.classList.remove("menu-open");
+  }, [menuOpen]);
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur bg-[#0b0f17]/70 border-b border-white/10">
-      <div className="max-w-6xl mx-auto h-16 px-4 flex items-center justify-between">
-        
-        <a
-          href="#about"
-          className="text-xl font-semibold tracking-tight bg-gradient-to-r from-teal-300 via-cyan-300 to-blue-300 bg-clip-text text-transparent"
-        >
-          YR
-        </a>
+    <header className="site-header">
+      <a className="brand" href="#top" aria-label="Yashraj Rathore — home">
+        YR<span>.</span>
+      </a>
 
-        <nav className="hidden md:flex items-center gap-6">
-          {nav.map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              className="text-sm text-slate-300 hover:text-white transition pb-1
-              relative after:absolute after:left-0 after:-bottom-0.5 after:w-0
-              after:h-[2px] after:bg-teal-300 after:transition-all hover:after:w-full"
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
+      <nav className="desktop-nav" aria-label="Primary navigation">
+        {nav.map((item, index) => (
+          <a key={item.id} href={`#${item.id}`}>
+            <span>0{index + 1}</span>
+            {item.label}
+          </a>
+        ))}
+      </nav>
 
-        <a
-          href="/resume.pdf"
-          className="rounded-md px-3 py-2 text-sm font-medium bg-white/10 text-white border border-white/10 hover:bg-white/20"
-        >
-          Resume
-        </a>
-      </div>
+      <a className="header-cta" href="#contact">
+        Let&apos;s talk <FiArrowUpRight />
+      </a>
+
+      <button
+        className="menu-toggle"
+        type="button"
+        aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+        aria-expanded={menuOpen}
+        aria-controls="mobile-navigation"
+        onClick={() => setMenuOpen((open) => !open)}
+      >
+        {menuOpen ? <FiX /> : <FiMenu />}
+      </button>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.nav
+            id="mobile-navigation"
+            className="mobile-nav"
+            aria-label="Mobile navigation"
+            initial={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
+            animate={{ opacity: 1, clipPath: "inset(0 0 0% 0)" }}
+            exit={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="mobile-nav__links">
+              {nav.map((item, index) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <span>0{index + 1}</span>
+                  {item.label}
+                </a>
+              ))}
+              <a href="#contact" onClick={() => setMenuOpen(false)}>
+                <span>05</span>
+                Say hello
+              </a>
+            </div>
+            <p>Toronto, Canada · Available worldwide</p>
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

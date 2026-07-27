@@ -1,86 +1,161 @@
-import Parallax from "./Parallax";
+import { motion } from "framer-motion";
+import { FiArrowDown, FiArrowUpRight, FiGithub } from "react-icons/fi";
 import Reveal from "./Reveal";
-import { FaGithub, FaLinkedin, FaFileAlt } from "react-icons/fa";
+
+const lineTransition = {
+  duration: 0.85,
+  ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+};
 
 export default function About() {
   return (
-    <section id="about" className="relative py-28 text-center">
-      {/*  Floating gradient orb */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-[20%] -translate-x-1/2 h-[600px] w-[700px]
-          bg-gradient-to-br from-teal-500/20 via-cyan-400/20 to-blue-500/20
-          blur-3xl opacity-70 rounded-full" />
-      </div>
+    <>
+      <section id="top" className="hero">
+        <div className="hero__aurora" aria-hidden="true" />
 
-      {/*  Animated wavy background */}
-      <div className="absolute inset-0 -z-20 opacity-[0.35]">
-        <svg
-          className="w-full h-full"
-          viewBox="0 0 800 400"
-          xmlns="http://www.w3.org/2000/svg"
+        <motion.div
+          className="hero__eyebrow"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15, ...lineTransition }}
         >
-          <path
-            d="M 0 200 C 200 250 400 150 600 200 C 750 240 800 180 800 180"
-            fill="none"
-            stroke="rgba(94,234,212,0.25)"
-            strokeWidth="2"
-          >
-            <animate
-              attributeName="d"
-              dur="6s"
-              repeatCount="indefinite"
-              values="
-              M 0 200 C 200 250 400 150 600 200 C 750 240 800 180 800 180;
-              M 0 180 C 220 130 380 280 610 220 C 740 200 800 260 800 260;
-              M 0 200 C 200 250 400 150 600 200 C 750 240 800 180 800 180
-              "
-            />
-          </path>
-        </svg>
-      </div>
+          <span className="status-dot" />
+          Full-stack engineer · Toronto, Canada
+        </motion.div>
 
-      <Parallax>
-        <Reveal>
-          <p className="text-sm text-teal-300/80 tracking-wide uppercase">
-            Full-Stack Developer
-          </p>
+        <div className="hero__grid">
+          <div className="hero__copy">
+            <h1>
+              <motion.span
+                initial={{ opacity: 0, y: 70 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.05, ...lineTransition }}
+              >
+                Complex systems,
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0, y: 70 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.16, ...lineTransition }}
+              >
+                made <em>human.</em>
+              </motion.span>
+            </h1>
 
-          <h1 className="mt-3 text-5xl md:text-7xl font-extrabold leading-tight tracking-tight">
-            Hi, I’m{" "}
-            <span className="bg-gradient-to-r from-teal-300 via-cyan-300 to-blue-300 bg-clip-text text-transparent">
-              Yashraj Rathore
-            </span>
-          </h1>
+            <motion.div
+              className="hero__intro"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.42, ...lineTransition }}
+            >
+              <p>
+                I&apos;m Yashraj, a software engineer who turns ambitious ideas
+                into thoughtful products—scalable underneath, effortless on
+                the surface.
+              </p>
+              <div className="hero__actions">
+                <a className="button button--primary" href="#work">
+                  See my work <FiArrowDown />
+                </a>
+                <a
+                  className="text-link"
+                  href="https://github.com/Yashraj-Rathore"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <FiGithub /> GitHub <FiArrowUpRight />
+                </a>
+              </div>
+            </motion.div>
+          </div>
 
-          <p className="mx-auto mt-6 max-w-2xl text-slate-300">
-            I specialize in building modern cloud-native platforms using Next.js,
-            FastAPI, and GCP — crafting beautiful UX backed by scalable systems.
-          </p>
-        </Reveal>
-      </Parallax>
-
-      <Parallax>
-        <div className="mt-10 flex items-center justify-center gap-4 flex-wrap">
-          <a
-            href="https://github.com"
-            className="flex items-center gap-2 text-white border border-white/10 bg-white/10 px-4 py-2 rounded-lg hover:bg-white/20"
+          <motion.div
+            className="hero-object"
+            initial={{ opacity: 0, scale: 0.82, rotate: 8 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ delay: 0.3, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            aria-label="Portrait of Yashraj Rathore"
           >
-            <FaGithub /> GitHub
-          </a>
-          <a
-            href="https://linkedin.com"
-            className="flex items-center gap-2 text-white border border-white/10 bg-white/10 px-4 py-2 rounded-lg hover:bg-white/20"
-          >
-            <FaLinkedin /> LinkedIn
-          </a>
-          <a
-            href="/resume.pdf"
-            className="flex items-center gap-2 bg-teal-400 text-[#0b0f17] font-semibold px-4 py-2 rounded-lg hover:bg-teal-300"
-          >
-            <FaFileAlt /> Resume
-          </a>
+            <div className="hero-object__orbit hero-object__orbit--one" />
+            <div className="hero-object__orbit hero-object__orbit--two" />
+            <div className="hero-object__card">
+              <img
+                src="https://avatars.githubusercontent.com/u/46467096?v=4"
+                alt="Yashraj Rathore"
+              />
+              <div className="hero-object__caption">
+                <span>Currently</span>
+                <strong>Building developer platforms</strong>
+              </div>
+            </div>
+            <div className="floating-note floating-note--top">
+              <span>01</span> Engineer
+            </div>
+            <div className="floating-note floating-note--bottom">
+              Code <span>+</span> empathy
+            </div>
+          </motion.div>
         </div>
-      </Parallax>
-    </section>
+
+        <motion.a
+          className="scroll-note"
+          href="#about"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+        >
+          <span />
+          Scroll to get to know me
+        </motion.a>
+      </section>
+
+      <section id="about" className="section about">
+        <div className="section-kicker">
+          <span>01</span>
+          <p>Behind the build</p>
+        </div>
+
+        <div className="about__grid">
+          <Reveal>
+            <p className="about__statement">
+              I care about the moment a technically hard thing starts to feel
+              <em> obvious</em> to the person using it.
+            </p>
+          </Reveal>
+
+          <div className="about__detail">
+            <Reveal delay={0.08}>
+              <p>
+                My work lives between backend architecture and product
+                experience. I enjoy untangling API workflows, data models, and
+                cloud infrastructure—then shaping an interface that makes all
+                that complexity disappear.
+              </p>
+            </Reveal>
+            <Reveal delay={0.14}>
+              <p>
+                Away from the ticket queue, I&apos;m usually exploring a new
+                framework, turning guitar tabs into software, or asking
+                “there&apos;s got to be a cleaner way to do this.”
+              </p>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <div className="about__facts">
+                <div>
+                  <span>Education</span>
+                  <strong>B.Eng. Software Engineering</strong>
+                  <p>York University · Lassonde</p>
+                </div>
+                <div>
+                  <span>Sweet spot</span>
+                  <strong>0 → 1 product engineering</strong>
+                  <p>APIs · platforms · polished UI</p>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

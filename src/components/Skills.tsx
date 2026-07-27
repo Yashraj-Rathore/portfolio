@@ -2,49 +2,62 @@ import Reveal from "./Reveal";
 
 const skillGroups = [
   {
-    title: "Frontend",
-    items: ["React", "Next.js", "TypeScript", "Tailwind", "MUI"],
+    number: "01",
+    title: "Product surfaces",
+    description: "Interfaces that make powerful systems feel calm.",
+    items: ["React", "Next.js", "Nuxt", "Angular", "TypeScript", "Tailwind", "MUI"],
   },
   {
-    title: "Backend",
-    items: ["FastAPI", "Node.js", "SQLModel"],
+    number: "02",
+    title: "Services & data",
+    description: "APIs, models, and workflows built for real use.",
+    items: ["FastAPI", "NestJS", "Node.js", "Django", "PostgreSQL", "SQL Server", "Redis"],
   },
   {
-    title: "Database",
-    items: ["PostgreSQL", "Supabase"],
-  },
-  {
-    title: "Infrastructure",
-    items: ["GCP", "Cloud Run", "Firebase Auth"],
+    number: "03",
+    title: "Cloud & delivery",
+    description: "The path from a local idea to a dependable product.",
+    items: ["GCP", "AWS", "Cloud Run", "Docker", "Terraform", "GitHub Actions", "OpenTelemetry"],
   },
 ];
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-10 md:py-16">
-      <Reveal>
-        <h2 className="text-center text-3xl md:text-4xl font-bold bg-gradient-to-r from-teal-300 via-cyan-300 to-blue-300 bg-clip-text text-transparent">
-          Skills
-        </h2>
-      </Reveal>
+    <section id="toolbox" className="section skills">
+      <div className="section-kicker">
+        <span>04</span>
+        <p>Toolbox</p>
+      </div>
 
-      <div className="max-w-5xl mx-auto mt-10 grid gap-6 md:grid-cols-2 px-4">
-        {skillGroups.map((g) => (
-          <Reveal key={g.title}>
-            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-              <h3 className="text-white font-semibold">{g.title}</h3>
+      <div className="skills__intro">
+        <Reveal>
+          <h2>
+            Broad enough to see the system.
+            <br />
+            <em>Focused enough to ship it.</em>
+          </h2>
+        </Reveal>
+        <Reveal delay={0.08}>
+          <p>
+            Tools change. The habit stays the same: understand the problem,
+            choose deliberately, and leave the codebase clearer than I found it.
+          </p>
+        </Reveal>
+      </div>
 
-              <div className="mt-3 flex flex-wrap gap-2">
-                {g.items.map((item) => (
-                  <span
-                    key={item}
-                    className="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-200"
-                  >
-                    {item}
-                  </span>
+      <div className="skills__grid">
+        {skillGroups.map((group, index) => (
+          <Reveal key={group.title} delay={index * 0.06}>
+            <article className="skill-card">
+              <span className="skill-card__number">{group.number}</span>
+              <h3>{group.title}</h3>
+              <p>{group.description}</p>
+              <div className="skill-card__items">
+                {group.items.map((item) => (
+                  <span key={item}>{item}</span>
                 ))}
               </div>
-            </div>
+            </article>
           </Reveal>
         ))}
       </div>
